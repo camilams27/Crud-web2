@@ -3,13 +3,13 @@ from django.shortcuts import get_object_or_404, render
 from .models import MarcarConsulta
 from .forms import MarcarConsultaForm
 from django.shortcuts import redirect
+from django.views.decorators.http import require_POST
 
-
+@require_POST
 @login_required
 def create_view(request):
     context = {}
-
-    form = MarcarConsultaForm(request.POST or None)
+    form = MarcarConsultaForm(request.POST)
     if form.is_valid():
         form.save()
 
